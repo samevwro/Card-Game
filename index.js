@@ -40,15 +40,13 @@ class Cards {
 
 class Menu{
     constructor(){
-        this.players = [];
         this.numOfWar = 0;
     }
     start() {
+        let roundCount = 1
         console.log('Welcome to the War card game.\n The game will start now!!');
         var player1 = new Player();
-        this.players.push(player1);
         var player2 = new Player();
-        this.players.push(player2);
         var newDeck = new Cards();
         newDeck.createDeck();
         newDeck.splitDeck();
@@ -57,18 +55,12 @@ class Menu{
         
         //This is the main code of the game to determine which card is higher and 
         while(Object.keys(player1.playerCards).length >= 1 && Object.keys(player2.playerCards).length >= 1) {
-            
-            //player1.selectedCard.push(player1.playerCards[0]);
-            //player2.selectedCard.push(player2.playerCards[0]);
-            player1.selectedCard = player1.playerCards.splice(0, 1) 
-            player2.selectedCard = player2.playerCards.splice(0, 1)
-            //player1.selectedCard.push(player1.playerCards[0]);
-            //player2.selectedCard.push(player2.playerCards[0]);
-            player1.selectedCard = player1.playerCards.splice(0, 1) 
-            player2.selectedCard = player2.playerCards.splice(0, 1)
-            var cardNum1 = this.findKings(player1.selectedCard)
-            var cardNum2 = this.findKings(player2.selectedCard)
-            
+            player1.selectedCard = player1.playerCards.splice(0, 1);
+            player2.selectedCard = player2.playerCards.splice(0, 1);
+            //This is where I call the FindKings function to determine the value of the card flipped to make compairsons eaiser
+            var cardNum1 = this.findKings(player1.selectedCard);
+            var cardNum2 = this.findKings(player2.selectedCard);
+            console.log(`Round: ${roundCount}`)
             console.log(`Player 1's card is (${player1.selectedCard.join('')}): Player 2's card is (${player2.selectedCard})`)
             if(cardNum1 > cardNum2) {
                 player1.playerCards.push(player1.selectedCard[0]);
@@ -91,60 +83,58 @@ class Menu{
                 this.numOfWar += 1;
                 player1.playerCards.splice(2, 0, player1.selectedCard[0]);
                 player2.playerCards.splice(2, 0, player2.selectedCard[0]);
-                console.log(player1.playerCards);
                 let p1War = player1.playerCards.splice(0, 4);
                 let p2War = player2.playerCards.splice(0, 4);
                 let warWinner = p1War.concat(p2War);
                 
-                
                 if(this.findKings(p1War) > this.findKings(p2War)){
-                    console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nPlayer 1 wins`);
                     console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nPlayer 1 wins`);
                     player1.playerCards = player1.playerCards.concat(warWinner);
                     player1.points += 1;
+                    
                 }else if(this.findKings(p1War) < this.findKings(p2War)){
-                    console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nPlayer 2 wins`);
                     console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nPlayer 2 wins`);
                     player2.playerCards = player2.playerCards.concat(warWinner);
                     player2.points += 1;
                 }else {
                     console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nIt's a tie. Draw again`);
+                    console.log(player1.playerCards);
+                    console.log(player2.playerCards);
                     player1.playerCards.push(p1War);
                     player2.playerCards.push(p2War);
-                    console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nIt's a tie. Draw again`);
-                    player1.playerCards.push(p1War);
-                    player2.playerCards.push(p2War);
-                    
-                }p1War.splice(0, 3);
-                p2War.splice(0, 3);
-                
-            }
-            player1.selectedCard.splice(0, 1);
-            player2.selectedCard.splice(0, 1);
+                    console.log(player1.playerCards);
+                    console.log(player2.playerCards);
+                    console.log(p1War);
+                    console.log(p2War);
+                };
+                p1War.splice(0, 3);
+                p2War.splice(0, 3);   
+            };
+            roundCount += 1;
             player1.selectedCard.pop;
             player2.selectedCard.pop;
             
-            console.log('Player 1: ',player1.points);
-            console.log('Player 2: ',player2.points);
-            console.log(`War total is: ${this.numOfWar}`);
-            //console.log(player1.playerCards);
-            //console.log(player2.playerCards);
+            console.log('---------------End Of Round----------------\n');
+            
             //I put a point limit on the game so it doesnt run forever ;
             if(player1.points > 100 || player2.points > 100){
-                console.log(`Player 1 Score: ${player1.points}. Player 2 Score: ${player2.points}`);
-                console.log(`War total is: ${this.numOfWar}`);
                 break;
+            }else if(Object.keys(player1.playerCards).length == 0 || Object.keys(player2.playerCards).length == 0){
+                if(Object.keys(player1.playerCards).length == 0){
+                    console.log("Player 1 ran out of cards")
+                }else if(Object.keys(player2.playerCards).length == 0){
+                    console.log("Player 2 ran out of cards")
+                }
             }
-            
-            console.log('---------------End Of Round----------------\n')
-            
-            setTimeout(() => {
-                
-            }, 50000);
-        }
-        
-
-        
+        //Where I compair scores and print the winner 
+        }if(player1.points > player2.points){
+            console.log("Player 1 Wins!!!")
+        }else if(player1.points < player2.points){
+            console.log("Player 2 Wins!!!")
+        }else {
+            console.log("It's a tie!!!")
+        }console.log(`Player 1 Score: ${player1.points} --- Player 2 Score: ${player2.points}`)
+        console.log(`War total is: ${this.numOfWar}`);
     }
     //This is the function I use to split the card and determine if its a number card or a face card and assign a value to a face card
     findKings(z) {
