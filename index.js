@@ -86,13 +86,13 @@ class Menu{
             else if(cardNum1 == cardNum2) {
                 console.log('This is WAR!!!')
                 this.numOfWar += 1
-                player1.playerCards.splice(2, 0, player1.selectedCard);
-                player2.playerCards.splice(2, 0, player2.selectedCard);
+                player1.playerCards.splice(2, 0, player1.selectedCard[0]);
+                player2.playerCards.splice(2, 0, player2.selectedCard[0]);
                 console.log(player1.playerCards)
                 let p1War = player1.playerCards.splice(0, 4);
                 let p2War = player2.playerCards.splice(0, 4);
                 let warWinner = p1War.concat(p2War);
-                console.log(player1.playerCards)
+                
                 if(this.findKings(p1War) > this.findKings(p2War)){
                     console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nPlayer 1 wins`);
                     player1.playerCards = player1.playerCards.concat(warWinner);
@@ -122,7 +122,7 @@ class Menu{
             console.log(player2.playerCards)
             console.log(Object.keys(player1.playerCards).length)
             console.log(Object.keys(player2.playerCards).length)
-            if(player1.points > 10 || player2.points > 10){
+            if(player1.points > 100 || player2.points > 100){
                 console.log(`Player 1 Score: ${player1.points}. Player 2 Score: ${player2.points}`);
                 break;
             }
