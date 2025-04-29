@@ -62,6 +62,10 @@ class Menu{
             //player2.selectedCard.push(player2.playerCards[0]);
             player1.selectedCard = player1.playerCards.splice(0, 1) 
             player2.selectedCard = player2.playerCards.splice(0, 1)
+            //player1.selectedCard.push(player1.playerCards[0]);
+            //player2.selectedCard.push(player2.playerCards[0]);
+            player1.selectedCard = player1.playerCards.splice(0, 1) 
+            player2.selectedCard = player2.playerCards.splice(0, 1)
             var cardNum1 = this.findKings(player1.selectedCard)
             var cardNum2 = this.findKings(player2.selectedCard)
             
@@ -92,15 +96,21 @@ class Menu{
                 let p2War = player2.playerCards.splice(0, 4);
                 let warWinner = p1War.concat(p2War);
                 
+                
                 if(this.findKings(p1War) > this.findKings(p2War)){
+                    console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nPlayer 1 wins`);
                     console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nPlayer 1 wins`);
                     player1.playerCards = player1.playerCards.concat(warWinner);
                     player1.points += 1;
                 }else if(this.findKings(p1War) < this.findKings(p2War)){
                     console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nPlayer 2 wins`);
+                    console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nPlayer 2 wins`);
                     player2.playerCards = player2.playerCards.concat(warWinner);
                     player2.points += 1;
                 }else {
+                    console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nIt's a tie. Draw again`);
+                    player1.playerCards.push(p1War);
+                    player2.playerCards.push(p2War);
                     console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nIt's a tie. Draw again`);
                     player1.playerCards.push(p1War);
                     player2.playerCards.push(p2War);
