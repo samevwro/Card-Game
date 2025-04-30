@@ -6,7 +6,7 @@ class Player{
         this.points = 0;
     }
 }
-//This is the card class where the card info is stored where a new deck can be created as well randomly split to each player
+//This is the card class where the card info is stored
 class Cards {
     constructor(){
         this.cards = ['Ace',2,3,4,5,6,7,8,9,10,'Jack','Queen','King'];
@@ -43,6 +43,7 @@ class Menu{
         this.numOfWar = 0;
     }
     start() {
+        //where the players and deck is created and infor is pushed to where it needs to go
         let roundCount = 1
         console.log('Welcome to the War card game.\n The game will start now!!');
         var player1 = new Player();
@@ -116,7 +117,7 @@ class Menu{
             
             console.log('---------------End Of Round----------------\n');
             
-            //I put a point limit on the game so it doesnt run forever ;
+            //I put a point limit on the game so it doesnt run forever 
             if(player1.points > 100 || player2.points > 100){
                 break;
             }else if(Object.keys(player1.playerCards).length == 0 || Object.keys(player2.playerCards).length == 0){
@@ -145,7 +146,7 @@ class Menu{
         }else if(card[4] == 'Q'){
             return(12);
         }else if(card[4] == 'A'){
-            return(14);
+            return(1);
         }else if(card[4] == 'J'){
             return(11);
         }else if (parseInt(card[4]) == 1) {
