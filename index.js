@@ -13,9 +13,10 @@ class Cards {
         this.suit = ['♣️','♠️','❤️','🍀'];
         this.deck = [];
         this.splitDeck1 = [];
-        this.splitDeck2 = []
+        this.splitDeck2 = [];
         
     };
+    //I decided to code a card generator as well a way to randomly split the cards between the players
     createDeck(){
         for(var x = 0; x < this.suit.length ; x++){
             for(let i = 0; i < this.cards.length ; i++){
@@ -61,6 +62,7 @@ class Menu{
             //This is where I call the FindKings function to determine the value of the card flipped to make compairsons eaiser
             var cardNum1 = this.findKings(player1.selectedCard);
             var cardNum2 = this.findKings(player2.selectedCard);
+            
             console.log(`Round: ${roundCount}`)
             console.log(`Player 1's card is (${player1.selectedCard.join('')}): Player 2's card is (${player2.selectedCard})`)
             if(cardNum1 > cardNum2) {
@@ -79,6 +81,7 @@ class Menu{
                 player1.selectedCard.splice(0, 1);
                 player2.selectedCard.splice(0, 1);
             }
+            //This is the war mechanic where it pulls 4 cards from the deck compairs the top card then rewards to the winner
             else if(cardNum1 == cardNum2) {
                 console.log('This is WAR!!!');
                 this.numOfWar += 1;
@@ -118,7 +121,7 @@ class Menu{
             console.log('---------------End Of Round----------------\n');
             
             //I put a point limit on the game so it doesnt run forever 
-            if(player1.points > 100 || player2.points > 100){
+            if(player1.points > 500 || player2.points > 500){
                 break;
             }else if(Object.keys(player1.playerCards).length == 0 || Object.keys(player2.playerCards).length == 0){
                 if(Object.keys(player1.playerCards).length == 0){
@@ -156,6 +159,5 @@ class Menu{
         }
     };
 };
-
 let menu = new Menu;
 menu.start();
