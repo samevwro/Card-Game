@@ -103,14 +103,9 @@ class Menu{
                     player2.points += 1;
                 }else {
                     console.log(`Player 1 draws: (${p1War[0]}), Player 2 draws: (${p2War[0]}). \nIt's a tie. Draw again`);
-                    console.log(player1.playerCards);
-                    console.log(player2.playerCards);
                     player1.playerCards.push(p1War);
                     player2.playerCards.push(p2War);
-                    console.log(player1.playerCards);
-                    console.log(player2.playerCards);
-                    console.log(p1War);
-                    console.log(p2War);
+                    
                 };
                 p1War.splice(0, 3);
                 p2War.splice(0, 3);   
