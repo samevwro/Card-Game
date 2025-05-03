@@ -1,3 +1,4 @@
+
 class Player{
     constructor(name){
         this.name = name;
@@ -145,15 +146,15 @@ class Menu{
         const myJSON = JSON.stringify(z);
         let card = myJSON.split("");
         if(card[4] == 'K'){
-            return(13);
+            return 13;
         }else if(card[4] == 'Q'){
-            return(12);
+            return 12;
         }else if(card[4] == 'A'){
-            return(1);
+            return 1;
         }else if(card[4] == 'J'){
-            return(11);
+            return 11;
         }else if (parseInt(card[4]) == 1) {
-            return(10);
+            return 10;
         }else{
             return(parseInt(card[4]));
         }
@@ -161,3 +162,5 @@ class Menu{
 };
 let menu = new Menu;
 menu.start();
+
+module.exports = {Player, Cards, Menu}
